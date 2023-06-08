@@ -180,7 +180,9 @@ img {
 }
 
 .Modal {
-  max-width: calc(100vw - 48px);
+  display: flex;
+  flex-direction: column;
+  max-width: calc(100vw - 40vw);
   max-height: calc(100vh - 24px);
 }
 

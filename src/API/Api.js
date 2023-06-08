@@ -4,7 +4,7 @@ axios.defaults.baseURL = 'https://pixabay.com/api';
 
 export class NewApi {
   constructor() {
-    this.input = 'cat';
+    this.input = '';
     this.page = 1;
     this.amountOfElements = 12;
     this.totalHits = null;

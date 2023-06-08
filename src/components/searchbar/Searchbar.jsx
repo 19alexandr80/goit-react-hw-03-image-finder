@@ -5,6 +5,9 @@ export class Searchbar extends React.Component {
     name: '',
   };
 
+  ressetForm = () => {
+    this.setState({ name: '' });
+  };
   inputChange = e => {
     this.setState({ name: e.target.value });
   };
@@ -20,7 +23,6 @@ export class Searchbar extends React.Component {
           <button type="submit" className="SearchForm-button">
             <span className="SearchForm-button-label">Search</span>
           </button>
-
           <input
             className="SearchForm-input"
             type="text"
