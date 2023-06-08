@@ -1,4 +1,5 @@
 import React from 'react';
+import { BiSearch } from 'react-icons/bi';
 
 export class Searchbar extends React.Component {
   state = {
@@ -21,7 +22,7 @@ export class Searchbar extends React.Component {
       <header className="Searchbar">
         <form className="SearchForm" onSubmit={this.formSubmit}>
           <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
+            <BiSearch className="SearchForm-button-label" />
           </button>
           <input
             className="SearchForm-input"
