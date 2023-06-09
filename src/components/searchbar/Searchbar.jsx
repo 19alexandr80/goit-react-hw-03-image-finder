@@ -30,7 +30,7 @@ export class Searchbar extends React.Component {
       <SearchbarStyled>
         <SearchFormStyled onSubmit={this.formSubmit}>
           <SearchFormButtonStyled type="submit">
-            <BiSearch className="SearchForm-button-label" />
+            <BiSearch size="35px" color="#3F00B5" />
           </SearchFormButtonStyled>
           <SearchFormInputStyled
             type="text"

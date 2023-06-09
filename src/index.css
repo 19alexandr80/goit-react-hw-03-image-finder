@@ -31,12 +31,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-/*
- * Стили компонента SearchForm
- */
-.SearchForm-button-label {
-  width: 35px;
-  height: 35px;
-  color: black;
-}
