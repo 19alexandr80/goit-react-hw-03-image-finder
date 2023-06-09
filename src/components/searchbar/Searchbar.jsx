@@ -1,5 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BiSearch } from 'react-icons/bi';
+
+import {
+  SearchbarStyled,
+  SearchFormStyled,
+  SearchFormButtonStyled,
+  SearchFormInputStyled,
+} from 'components/searchbar/SearchbarStyled.styled';
 
 export class Searchbar extends React.Component {
   state = {
@@ -19,22 +27,25 @@ export class Searchbar extends React.Component {
   };
   render() {
     return (
-      <header className="Searchbar">
-        <form className="SearchForm" onSubmit={this.formSubmit}>
-          <button type="submit" className="SearchForm-button">
+      <SearchbarStyled>
+        <SearchFormStyled onSubmit={this.formSubmit}>
+          <SearchFormButtonStyled type="submit">
             <BiSearch className="SearchForm-button-label" />
-          </button>
-          <input
-            className="SearchForm-input"
+          </SearchFormButtonStyled>
+          <SearchFormInputStyled
             type="text"
+            name="input"
             autoComplete="off"
             autoFocus
             placeholder="Search images and photos"
             onChange={this.inputChange}
             value={this.state.name}
           />
-        </form>
-      </header>
+        </SearchFormStyled>
+      </SearchbarStyled>
     );
   }
 }
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};

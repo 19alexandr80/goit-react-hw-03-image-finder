@@ -1,4 +1,11 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
+import { ButtonStyled } from 'components/button/ButtonStyled.styled';
+import {
+  ModalStyled,
+  OverlayStyled,
+} from 'components/modal/ModalStyled.styled';
 
 export class Modal extends React.Component {
   componentDidMount() {
@@ -19,22 +26,18 @@ export class Modal extends React.Component {
   };
   render() {
     return (
-      <div className="Overlay" onClick={this.toogleModal}>
-        <div className="Modal">
-          <img
-            src={this.props.urlModal}
-            alt="foto"
-            className="ModalGalleryItem"
-          />
-          <button
-            type="button"
-            onClick={this.props.toogleModal}
-            className="Button"
-          >
+      <OverlayStyled onClick={this.toogleModal}>
+        <ModalStyled>
+          <img src={this.props.urlModal} alt="foto" />
+          <ButtonStyled type="button" onClick={this.props.toogleModal}>
             close
-          </button>
-        </div>
-      </div>
+          </ButtonStyled>
+        </ModalStyled>
+      </OverlayStyled>
     );
   }
 }
+Modal.propTypes = {
+  toogleModal: PropTypes.func.isRequired,
+  urlModal: PropTypes.string.isRequired,
+};

@@ -1,8 +1,12 @@
+import PropTypes from 'prop-types';
+
+import { ImageGalleryStyled } from 'components/imageGallery/ImageGalleryStyled.styled';
+
 import { ImageGalleryItem } from 'components/imageGallery/ImageGalleryItem';
 
 export const ImageGallery = ({ list, toogleModal }) => {
   return (
-    <ul className="ImageGallery">
+    <ImageGalleryStyled>
       {list.map(({ id, webformatURL, largeImageURL }) => {
         return (
           <ImageGalleryItem
@@ -13,6 +17,16 @@ export const ImageGallery = ({ list, toogleModal }) => {
           />
         );
       })}
-    </ul>
+    </ImageGalleryStyled>
   );
+};
+ImageGallery.propTypes = {
+  toogleModal: PropTypes.func.isRequired,
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
 };

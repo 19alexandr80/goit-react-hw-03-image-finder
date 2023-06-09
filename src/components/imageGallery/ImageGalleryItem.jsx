@@ -1,11 +1,19 @@
+import PropTypes from 'prop-types';
+
+import {
+  ImageGalleryItemStyled,
+  ImageGalleryItemImageStyled,
+} from 'components/imageGallery/ImageGalleryStyled.styled';
+
 export const ImageGalleryItem = ({ url, largeImageURL, toogleModal }) => {
   return (
-    <li
-      className="ImageGalleryItem"
-      data-url={largeImageURL}
-      onClick={toogleModal}
-    >
-      <img src={url} alt="foto" className="ImageGalleryItem-image" />
-    </li>
+    <ImageGalleryItemStyled data-url={largeImageURL} onClick={toogleModal}>
+      <ImageGalleryItemImageStyled src={url} alt="foto" />
+    </ImageGalleryItemStyled>
   );
+};
+ImageGalleryItem.propTypes = {
+  toogleModal: PropTypes.func.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  url: PropTypes.string.isRequired,
 };

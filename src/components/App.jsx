@@ -7,6 +7,8 @@ import { Modal } from 'components/modal/Modal';
 import { Loader } from 'components/loader/Loader';
 import { Button } from 'components/button/Button';
 
+import { AppStyled } from 'components/AppStyled.styled';
+
 const api = new NewApi();
 
 export class App extends React.Component {
@@ -64,7 +66,7 @@ export class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <AppStyled>
         <Searchbar onSubmit={this.onSubmit} />
         <ImageGallery list={this.state.list} toogleModal={this.toogleModal} />
         {this.state.status && <Loader />}
@@ -77,7 +79,7 @@ export class App extends React.Component {
             toogleModal={this.toogleModal}
           />
         )}
-      </div>
+      </AppStyled>
     );
   }
 }
