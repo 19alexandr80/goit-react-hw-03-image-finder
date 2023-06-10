@@ -17,40 +17,65 @@ export class App extends React.Component {
     status: false,
     showModal: false,
     urlModal: '',
+    name: '',
+    pege: 1,
   };
 
   // componentDidMount() {}
-  // componentDidUpdate() {}
+  async componentDidUpdate(a, b) {
+    if (!this.state.name) {
+      alert('name please');
+      return;
+    }
+    if (this.state.name !== b.name) {
+      this.setState({ status: true });
+      try {
+        const data = await api.getUser(this.state.name, this.state.pege);
+        if (!data.hits.length) {
+          alert('invalid name ');
+          return;
+        }
+        this.setState(() => {
+          return { list: [...data.hits] };
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.setState({ status: false });
+        return;
+      }
+    }
+    if (this.state.pege !== b.pege && this.state.name) {
+      this.setState({ status: true });
+      try {
+        const data = await api.getUser(this.state.name, this.state.pege);
+        this.setState(() => {
+          return { list: [...this.state.list, ...data.hits] };
+        });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        this.setState({ status: false });
+      }
+    }
+  }
   // componentWillUnmount() {}
-
-  onSubmit = async add => {
-    this.setState({ status: true });
-    api.resetPege();
-    api.setInput(add);
-    try {
-      const data = await api.getUser();
-
-      this.setState(() => {
-        return { list: [...data.hits] };
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.setState({ status: false });
-    }
+  listClearing = () => {
+    this.setState({
+      list: [],
+      pege: 1,
+    });
   };
-  onClickButton = async () => {
-    this.setState({ status: true });
-    try {
-      const data = await api.getUser();
-      this.setState(() => {
-        return { list: [...this.state.list, ...data.hits] };
-      });
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.setState({ status: false });
-    }
+  onSubmit = add => {
+    this.setState({
+      name: add,
+      pege: 1,
+    });
+  };
+  onClickButton = () => {
+    this.setState(state => ({
+      pege: state.pege + 1,
+    }));
   };
   toogleModal = e => {
     this.setState(state => ({
@@ -68,9 +93,15 @@ export class App extends React.Component {
     return (
       <AppStyled>
         <Searchbar onSubmit={this.onSubmit} />
-        <ImageGallery list={this.state.list} toogleModal={this.toogleModal} />
-        {this.state.status && <Loader />}
         {this.state.list.length !== 0 && (
+          <ImageGallery
+            list={this.state.list}
+            toogleModal={this.toogleModal}
+            listClearing={this.listClearing}
+          />
+        )}
+        {this.state.status && <Loader />}
+        {this.state.list.length !== 0 && !this.state.status && (
           <Button onClick={this.onClickButton} />
         )}
         {this.state.showModal && (
