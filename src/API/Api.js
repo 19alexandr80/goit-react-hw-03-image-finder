@@ -22,4 +22,7 @@ export class NewApi {
   getAmountOfElements() {
     return this.amountOfElements;
   }
+  getTotalHits() {
+    return this.totalHits;
+  }
 }
