@@ -67,9 +67,13 @@ export class App extends React.Component {
     });
   };
   onSubmit = add => {
+    if (add === this.state.name) {
+      alert('Result on screen');
+      return;
+    }
+    this.listClearing();
     this.setState({
       name: add,
-      pege: 1,
     });
   };
   onClickButton = () => {
@@ -94,11 +98,7 @@ export class App extends React.Component {
       <AppStyled>
         <Searchbar onSubmit={this.onSubmit} />
         {this.state.list.length !== 0 && (
-          <ImageGallery
-            list={this.state.list}
-            toogleModal={this.toogleModal}
-            listClearing={this.listClearing}
-          />
+          <ImageGallery list={this.state.list} toogleModal={this.toogleModal} />
         )}
         {this.state.status && <Loader />}
         {this.state.list.length !== 0 && !this.state.status && (

@@ -6,26 +6,6 @@ import { ImageGalleryStyled } from 'components/imageGallery/ImageGalleryStyled.s
 import { ImageGalleryItem } from 'components/imageGallery/ImageGalleryItem';
 
 export class ImageGallery extends React.Component {
-  state = {
-    start: true,
-  };
-
-  componentDidMount() {
-    this.setState(() => {
-      return { start: true };
-    });
-  }
-  // componentDidUpdate() {}
-  componentWillUnmount() {
-    if (this.state.start) {
-      this.setState(() => {
-        return { start: false };
-      });
-      return;
-    }
-    this.props.listClearing();
-  }
-
   render() {
     return (
       <ImageGalleryStyled>
