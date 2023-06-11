@@ -22,6 +22,10 @@ export class Searchbar extends React.Component {
   };
   formSubmit = e => {
     e.preventDefault();
+    if (!this.state.name) {
+      alert('name please');
+      return;
+    }
     this.props.onSubmit(this.state.name);
     this.ressetForm();
   };

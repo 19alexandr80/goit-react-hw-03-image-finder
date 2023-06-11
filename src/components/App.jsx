@@ -23,11 +23,7 @@ export class App extends React.Component {
 
   // componentDidMount() {}
   async componentDidUpdate(a, b) {
-    if (!this.state.name) {
-      alert('name please');
-      return;
-    }
-    if (this.state.name !== b.name) {
+    if (this.state.name !== b.name || this.state.pege !== b.pege) {
       this.setState({ status: true });
       try {
         const data = await api.getUser(this.state.name, this.state.pege);
@@ -36,26 +32,13 @@ export class App extends React.Component {
           return;
         }
         this.setState(() => {
-          return { list: [...data.hits] };
-        });
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.setState({ status: false });
-        return;
-      }
-    }
-    if (this.state.pege !== b.pege && this.state.name) {
-      this.setState({ status: true });
-      try {
-        const data = await api.getUser(this.state.name, this.state.pege);
-        this.setState(() => {
           return { list: [...this.state.list, ...data.hits] };
         });
       } catch (error) {
         console.error(error);
       } finally {
         this.setState({ status: false });
+        return;
       }
     }
   }
